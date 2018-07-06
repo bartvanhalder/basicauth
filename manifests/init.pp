@@ -1,4 +1,4 @@
-class klbr_basicauth (
+class basicauth (
     $owner      = 'www-data',
     $group      = 'www-data',
     $mode       = '0600',
@@ -29,7 +29,7 @@ class klbr_basicauth (
     {
         concat::fragment{ "basicauth_fragment_$user":
             #always the same location as the main class
-            target  => "$::klbr_basicauth::location", 
+            target  => "$::basicauth::location", 
             order   => '10',
             content => "$user:$password\n",
         }

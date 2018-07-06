@@ -1,15 +1,15 @@
 node 'some_node' {
 
-    class { 'klbr_basicauth':
+    class { 'basicauth':
         ensure  => 'present',
     }
 
-    klbr_basicauth::basic_entry { 'aap':
+    basicauth::basic_entry { 'aap':
         user        => "aap",
         password    => "some_hash_here",
     }
 
-    klbr_basicauth::basic_entry { 'noot':
+    basicauth::basic_entry { 'noot':
         user        => "noot",
         password    => "another_hash_here",
     }

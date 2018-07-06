@@ -9,22 +9,22 @@ You will have to do any configuration of the webserver yourself. Or with another
 # Does not do anything by default
 Since we will include this module in a role where it will not be used all the time, the default behaviour is to do nothing. 
 
-Only by setting the variable $::klbr_basicauth::ensure to 'present' will this module manage a file. 
+Only by setting the variable $::basicauth::ensure to 'present' will this module manage a file. 
 
-Without defining some '$::klbr_basicauth::basic_entry' instances nothing will be written to this file.
+Without defining some '$::basicauth::basic_entry' instances nothing will be written to this file.
 
 ## Example with Puppetcode
 ````
-    class { 'klbr_basicauth':
+    class { 'basicauth':
         ensure  => 'present',
     }
 
-    klbr_basicauth::basic_entry { 'aap':
+    basicauth::basic_entry { 'aap':
         user        => "aap",
         password    => "some_hash_here",
     }
 
-    klbr_basicauth::basic_entry { 'noot':
+    basicauth::basic_entry { 'noot':
         user        => "noot",
         password    => "another_hash_here",
     }
@@ -32,16 +32,16 @@ Without defining some '$::klbr_basicauth::basic_entry' instances nothing will be
 ## Puppet and Hiera
 ### Puppet:
 ````
-    include klbr_basicauth
+    include basicauth
 
-    $entry = hiera('klbr_basicauth::basic_entry', {})
-    create_resources('klbr_basicauth::basic_entry', $entry)
+    $entry = hiera('basicauth::basic_entry', {})
+    create_resources('basicauth::basic_entry', $entry)
 ````
 ### Hiera:
 ````
-klbr_basicauth::ensure: 'present'
+basicauth::ensure: 'present'
 
-klbr_basicauth::basic_entry: 
+basicauth::basic_entry: 
   'aap':
     user: 'aap'
     password: 'some_hash_here'
@@ -52,7 +52,7 @@ klbr_basicauth::basic_entry:
 # Variables used by the module
 
 ````
-klbr_basicauth (
+basicauth (
     $owner      = 'www-data',
     $group      = 'www-data',
     $mode       = '0600',
