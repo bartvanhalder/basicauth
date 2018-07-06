@@ -1,0 +1,15 @@
+klbr_basicauth::ensure: 'present'
+
+klbr_basicauth::basic_entry: 
+  'aap':
+    user: 'aap'
+    password: 'some_hash_here'
+  'noot':
+    user: 'noot'
+    password: 'another_hash_here'
+
+# combine with puppetcode like this: 
+# include klbr_basicauth
+#
+# $entry = hiera('klbr_basicauth::basic_entry', {})
+# create_resources('klbr_basicauth::basic_entry', $entry)
