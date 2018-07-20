@@ -5,13 +5,13 @@ node 'some_node' {
     }
 
     basicauth::basic_entry { 'aap':
-        user        => "aap",
-        password    => "some_hash_here",
+        user     => 'aap',
+        password => 'some_hash_here',
     }
 
     basicauth::basic_entry { 'noot':
-        user        => "noot",
-        password    => "another_hash_here",
+        user     => 'noot',
+        password => 'another_hash_here',
     }
 
 }
