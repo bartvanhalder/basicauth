@@ -29,7 +29,7 @@ Without defining some '$::basicauth::basic_entry' instances nothing will be writ
         password    => "another_hash_here",
     }
 ````
-## Puppet and Hiera
+## Example with Puppetcode and Hiera
 ### Puppet:
 ````
     include basicauth
@@ -47,6 +47,7 @@ basicauth::basic_entry:
     password: 'some_hash_here'
   'noot':
     user: 'noot'
+    password: 'another_hash_here'
 ````
 
 # Variables used by the module
