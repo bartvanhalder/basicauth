@@ -8,7 +8,8 @@ class basicauth (
 )
 {
     if $ensure == 'present' {
-
+        $entry = hiera('basicauth::basic_entry', {})
+        create_resources('basicauth::basic_entry', $entry)
         concat { $location:
             owner => $owner,
             group => $group,
@@ -20,4 +21,6 @@ class basicauth (
             order   => '01',
         }
     }
+
+
 }
