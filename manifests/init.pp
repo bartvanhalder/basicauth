@@ -4,7 +4,7 @@ class basicauth (
     $group      = 'www-data',
     $mode       = '0600',
     $location   = '/var/www/.basicauth',
-    $ensure     = 'absent', # Do not do anything unless explicitly enabled
+    $ensure     = 'absent', # Do not do anything unless explicitly enabled 
 )
 {
     if $ensure == 'present' {
