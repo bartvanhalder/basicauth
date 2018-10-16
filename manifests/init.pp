@@ -21,6 +21,11 @@ class basicauth (
             order   => '01',
         }
     }
-
-
+    elsif $ensure == 'absent' {
+        $entry = hiera('basicauth::basic_entry', {})
+        file { $location:
+            ensure => 'absent',
+            force  => true
+        }
+    }
 }
