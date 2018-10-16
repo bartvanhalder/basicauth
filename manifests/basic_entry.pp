@@ -15,18 +15,18 @@ define basicauth::basic_entry(
                 content => "${user}:${password}\n",
             }
         }
-        'md5': {
-            notify { 'md5 algorithm':
-                name    => 'md5',
-                message => 'md5',
-            }
-        }
-        'bcrypt': {
-            notify { 'bcrypt algorithm':
-                name    => 'bcrypt',
-                message => 'bcrypt',
-            }
-        }
+        # 'md5': {
+        #     notify { 'md5 algorithm':
+        #         name    => 'md5',
+        #         message => 'md5',
+        #     }
+        # }
+        # 'bcrypt': {
+        #     notify { 'bcrypt algorithm':
+        #         name    => 'bcrypt',
+        #         message => 'bcrypt',
+        #     }
+        # }
 
     }
 }
