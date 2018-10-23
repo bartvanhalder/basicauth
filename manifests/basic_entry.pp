@@ -2,12 +2,15 @@
 define basicauth::basic_entry(
     $user       = undef,
     $password   = undef,
-    $algorithm  = 'literal'
+    $algorithm  = 'literal',
+    $hashtype   = 'md5',
 )
 {
+    include ::stdlib
 
     case $algorithm  {
         default: {
+            # this includes the 'literal' option
             concat::fragment{ "basicauth_fragment_${user}":
                 # always the same location as the main class
                 target  => $::basicauth::location,
@@ -15,18 +18,16 @@ define basicauth::basic_entry(
                 content => "${user}:${password}\n",
             }
         }
-        # 'md5': {
-        #     notify { 'md5 algorithm':
-        #         name    => 'md5',
-        #         message => 'md5',
-        #     }
-        # }
-        # 'bcrypt': {
-        #     notify { 'bcrypt algorithm':
-        #         name    => 'bcrypt',
-        #         message => 'bcrypt',
-        #     }
-        # }
+        'hash': {
+            $seed            = fqdn_rand_string(10, '', '4dKqzRr4XUBzL2QD8hLw')
+            $hashed_password = pw_hash($password, $hashtype, $seed)
 
+            concat::fragment{ "basicauth_fragment_${user}":
+                # always the same location as the main class
+                target  => $::basicauth::location,
+                order   => '10',
+                content => "${user}:${hashed_password},\n",
+            }
+        }
     }
 }
