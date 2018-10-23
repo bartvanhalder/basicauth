@@ -6,18 +6,13 @@ This module creates files which can be used by webservers to look up authenticat
 
 You will have to do any configuration of the webserver yourself. Or with another relevant Puppet module, ofcourse. 
 
-# Does not do anything by default
-Since we will include this module in a role where it will not be used all the time, the default behaviour is to do nothing. 
-
-Only by setting the variable $::basicauth::ensure to 'present' will this module manage a file. 
-
-Without defining some '$::basicauth::basic_entry' instances nothing will be written to this file.
+Since this module requires some data to generate a basic authentication file, it does not do anything by default. 
 
 ## Example with Puppetcode
 ````
-    class { 'basicauth':
-        ensure  => 'present',
-    }
+    include '::basicauth'
+
+    basicauth::ensure => 'present',
 
     basicauth::basic_entry { 'aap':
         user        => "aap",
@@ -33,9 +28,6 @@ Without defining some '$::basicauth::basic_entry' instances nothing will be writ
 ### Puppet:
 ````
     include basicauth
-
-    $entry = hiera('basicauth::basic_entry', {})
-    create_resources('basicauth::basic_entry', $entry)
 ````
 ### Hiera:
 ````
@@ -63,8 +55,15 @@ basicauth (
 ````
 
 ````
-    define basic_entry(
-        $user       = undef,
-        $password   = undef,
-    ) 
+    define basicauth::basic_entry(
+    $user       = undef,
+    $password   = undef,
+    $algorithm  = 'literal',
+    $hashtype   = 'md5',
+)
 ````
+
+By using `literal` as algorithm you can use a literal string in plaintext or a bcrypt hash generated elsewhere. 
+
+If you want to use cyphers supported by stdlib, you can choose `hash` as algorithm and supply an optional `hashtype`, which can currently be: `MD5`, `SHA-256` or `SHA-512`. If the [standard library](https://forge.puppet.com/puppetlabs/stdlib/) supports new crypt methods in the future, you can use these. 
+
