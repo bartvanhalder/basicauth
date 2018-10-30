@@ -55,7 +55,7 @@ basicauth (
 ````
 
 ````
-    define basicauth::basic_entry(
+define basicauth::basic_entry(
     $user       = undef,
     $password   = undef,
     $algorithm  = 'literal',
