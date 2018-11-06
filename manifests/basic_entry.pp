@@ -18,7 +18,7 @@ define basicauth::basic_entry(
             $content         = "${user}:${password}\n"
         }
     }
-
+    
     concat::fragment{ "basicauth_fragment_${user}":
         # always the same location as the main class
         target  => $::basicauth::location,

@@ -1,12 +1,12 @@
 {
   "name": "klbr-basicauth",
-  "version": "0.0.3",
+  "version": "1.0.1",
   "author": "Kaliber Interactive",
   "summary": "",
   "license": "MIT",
   "source": "https://github.com/Kaliber/klbr-basicauth",
   "dependencies": [
-  {
+    {
       "name": "puppetlabs/stdlib",
       "version_requirement": ">= 4.25.1 < 5.0.0"
     }

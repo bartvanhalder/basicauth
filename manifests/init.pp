@@ -28,13 +28,4 @@ class basicauth (
             force  => true
         }
     }
-
-     # tried to test vault lookup module, but we don't have a vault server and the 
-     # dev option doesn't do SSL and stuff... 
-     
-    # $d = Deferred('vault_lookup::lookup', ["secret/basic_auth", 'http://puppet.vagrant.lan:8200'])
-
-    # notify { example :
-    #     message => $d
-    # }
 }
