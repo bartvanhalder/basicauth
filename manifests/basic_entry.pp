@@ -7,21 +7,22 @@ define basicauth::basic_entry (
   Stdlib::Unixpath       $location   = $::basicauth::location,
 ) {
 
-    case $algorithm  {
-        'hash': {
-            $seed            = fqdn_rand_string(10, '', '4dKqzRr4XUBzL2QD8hLw')
-            $hashed_password = pw_hash($password, $hashtype, $seed)
-            $content         = "${user}:${hashed_password},\n"
-        }
-        default: {
-            $content         = "${user}:${password}\n"
-        }
+  case $algorithm {
+    'hash': {
+      $seed            = fqdn_rand_string(10, '', '4dKqzRr4XUBzL2QD8hLw')
+      $hashed_password = pw_hash($password, $hashtype, $seed)
+      $content         = "${user}:${hashed_password},\n"
     }
+    default: {
+      $content         = "${user}:${password}\n"
+    }
+  }
 
-    concat::fragment{ "basicauth_fragment_${user}":
-        # always the same location as the main class
-        target  => $location,
-        order   => '10',
-        content => $content,
-    }
+  concat::fragment { "basicauth_fragment_${user}":
+    # always the same location as the main class
+    target  => $location,
+    order   => '10',
+    content => $content,
+  }
+
 }
