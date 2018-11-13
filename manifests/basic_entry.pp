@@ -6,7 +6,6 @@ define basicauth::basic_entry (
   String[1]              $hashtype   = 'md5',
   Stdlib::Unixpath       $location   = $::basicauth::location,
 ) {
-    include ::stdlib
 
     case $algorithm  {
         'hash': {
