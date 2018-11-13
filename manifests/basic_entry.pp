@@ -1,7 +1,7 @@
 # Defines values for username and password
 define basicauth::basic_entry (
-  Optional[String[1]]    $user       = undef,
-  Optional[String[1]]    $password   = undef,
+  String[1]              $password,
+  String[1]              $user       = $title,
   Enum['literal','hash'] $algorithm  = 'literal',
   String[1]              $hashtype   = 'md5',
   Stdlib::Unixpath       $location   = $::basicauth::location,
