@@ -1,12 +1,11 @@
 # Defines values for username and password
-define basicauth::basic_entry(
-    $user       = undef,
-    $password   = undef,
-    $algorithm  = 'literal',
-    $hashtype   = 'md5',
-    $location   = $::basicauth::location,
-)
-{
+define basicauth::basic_entry (
+  Optional[String[1]]    $user       = undef,
+  Optional[String[1]]    $password   = undef,
+  Enum['literal','hash'] $algorithm  = 'literal',
+  String[1]              $hashtype   = 'md5',
+  Stdlib::Unixpath       $location   = $::basicauth::location,
+) {
     include ::stdlib
 
     case $algorithm  {

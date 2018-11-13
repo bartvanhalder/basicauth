@@ -1,12 +1,12 @@
 # This module allows you to generate a file with basic authentication credentials for use with Apache Webserver ea
 class basicauth (
-    $owner      = 'www-data',
-    $group      = 'www-data',
-    $mode       = '0600',
-    $ensure     = 'absent', # Do not do anything unless explicitly enabled 
-    $location   = '/var/www/.basicauth',
-)
-{
+  String[1]                $owner      = 'www-data',
+  String[1]                $group      = 'www-data',
+  Stdlib::Filemode         $mode       = '0600',
+  Enum['present','absent'] $ensure     = 'absent', # Do not do anything unless explicitly enabled
+  Stdlib::Unixpath         $location   = '/var/www/.basicauth',
+) {
+
     if $ensure == 'present' {
         $entry = hiera('basicauth::basic_entry', {})
         create_resources('basicauth::basic_entry', $entry)
@@ -25,7 +25,7 @@ class basicauth (
         $entry = hiera('basicauth::basic_entry', {})
         file { $location:
             ensure => 'absent',
-            force  => true
+            force  => true,
         }
     }
 }
