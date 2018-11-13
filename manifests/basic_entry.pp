@@ -4,6 +4,7 @@ define basicauth::basic_entry(
     $password   = undef,
     $algorithm  = 'literal',
     $hashtype   = 'md5',
+    $location   = $::basicauth::location,
 )
 {
     include ::stdlib
@@ -18,10 +19,10 @@ define basicauth::basic_entry(
             $content         = "${user}:${password}\n"
         }
     }
-    
+
     concat::fragment{ "basicauth_fragment_${user}":
         # always the same location as the main class
-        target  => $::basicauth::location,
+        target  => $location,
         order   => '10',
         content => $content,
     }

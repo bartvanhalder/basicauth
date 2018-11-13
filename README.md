@@ -12,16 +12,19 @@ Since this module requires some data to generate a basic authentication file, it
 ````
     include '::basicauth'
 
-    basicauth::ensure => 'present',
+    basicauth::ensure   => 'present',
+    basicauth::location => '/some/path/.some_file',
 
     basicauth::basic_entry { 'aap':
         user        => "aap",
-        password    => "some_hash_here",
+        password    => "any literal string, externally generated hash or an eyaml hash",
     }
 
     basicauth::basic_entry { 'noot':
         user        => "noot",
-        password    => "another_hash_here",
+        password    => "any literal string, externally generated hash or an eyaml hash",
+        algorithm   => 'hash',
+        hashtype    => 'SHA-512',
     }
 ````
 ## Example with Puppetcode and Hiera
@@ -35,11 +38,13 @@ basicauth::ensure: 'present'
 
 basicauth::basic_entry: 
   'aap':
-    user: 'aap'
+    user:     'aap'
     password: 'some_hash_here'
   'noot':
-    user: 'noot'
-    password: 'another_hash_here'
+    user:      'noot'
+    password:  'this could be some eyaml hash'
+    algorithm: 'hash'
+    hashtype:  'SHA-512'
 ````
 
 # Variables used by the module
@@ -60,6 +65,7 @@ define basicauth::basic_entry(
     $password   = undef,
     $algorithm  = 'literal',
     $hashtype   = 'md5',
+    $location   = $::basicauth::location,
 )
 ````
 
